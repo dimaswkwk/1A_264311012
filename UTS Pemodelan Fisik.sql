@@ -12,15 +12,13 @@ CREATE TABLE pengguna (
   nama        VARCHAR(100) NOT NULL,
   no_telepon  VARCHAR(20) NULL,
   email       VARCHAR(100) NOT NULL,
-  password    VARCHAR(255) NOT NULL,
-  UNIQUE KEY uq_pengguna_email (email)
+  password    VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE kategori_sampah (
   id_kategori   INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   nama_kategori VARCHAR(100) NOT NULL,
-  deskripsi     TEXT NULL,
-  PRIMARY KEY (id_kategori)
+  deskripsi     TEXT NULL
 );
 
 CREATE TABLE jenis_sampah (
@@ -29,7 +27,6 @@ CREATE TABLE jenis_sampah (
   nama_jenis  VARCHAR(100) NOT NULL,
   harga       DECIMAL(12,2) NOT NULL DEFAULT 0,
   stock       DECIMAL(12,2) NOT NULL DEFAULT 0,
-  PRIMARY KEY (id_jenis),
   CONSTRAINT chk_jenis_harga CHECK (harga >= 0 AND stock >= 0),
   CONSTRAINT fk_jenis_kategori FOREIGN KEY (id_kategori)
     REFERENCES kategori_sampah (id_kategori) ON UPDATE CASCADE
