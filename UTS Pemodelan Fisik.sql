@@ -46,7 +46,6 @@ CREATE TABLE setoran (
   jumlah          DECIMAL(12,2) NOT NULL,
   harga_setor     DECIMAL(12,2) NOT NULL,
   subtotal_setor  DECIMAL(14,2) NOT NULL,
-  PRIMARY KEY (id_setoran),
   CONSTRAINT chk_setoran_jumlah CHECK (jumlah > 0),
   CONSTRAINT chk_setoran_status CHECK (status_setoran IN ('menunggu','ditolak','selesai')),
   CONSTRAINT fk_setoran_pengguna FOREIGN KEY (id_pengguna)
@@ -58,7 +57,7 @@ CREATE TABLE setoran (
 );
 
 CREATE TABLE rekap_setoran (
-  id_rekap        INT NOT NULL AUTO_INCREMENT,
+  id_rekap        INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   id_pengguna     INT NOT NULL,
   id_admin        INT NOT NULL,
   periode         DATE NOT NULL,
@@ -66,7 +65,6 @@ CREATE TABLE rekap_setoran (
   total_jumlah    DECIMAL(12,2) NOT NULL DEFAULT 0,
   total_nilai     DECIMAL(14,2) NOT NULL DEFAULT 0,
   tanggal_dicatat DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (id_rekap),
   UNIQUE KEY uq_rekap_pengguna_periode (id_pengguna, periode),
   CONSTRAINT chk_rekap_periode CHECK (DAY(periode) = 1),
   CONSTRAINT chk_rekap_nilai CHECK (jumlah_setoran >= 0 AND total_jumlah >= 0 AND total_nilai >= 0),
