@@ -1,34 +1,30 @@
-
-
 CREATE TABLE admin (
-  id_admin INT NOT NULL AUTO_INCREMENT,
+  id_admin INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   nama     VARCHAR(100) NOT NULL,
   email    VARCHAR(100) NOT NULL,
   password VARCHAR(255) NOT NULL,
-  PRIMARY KEY (id_admin),
   UNIQUE KEY uq_admin_email (email)
 );
 
 CREATE TABLE pengguna (
-  id_pengguna INT NOT NULL AUTO_INCREMENT,
+  id_pengguna INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   id_alamat   INT NULL,
   nama        VARCHAR(100) NOT NULL,
   no_telepon  VARCHAR(20) NULL,
   email       VARCHAR(100) NOT NULL,
   password    VARCHAR(255) NOT NULL,
-  PRIMARY KEY (id_pengguna),
   UNIQUE KEY uq_pengguna_email (email)
 );
 
 CREATE TABLE kategori_sampah (
-  id_kategori   INT NOT NULL AUTO_INCREMENT,
+  id_kategori   INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   nama_kategori VARCHAR(100) NOT NULL,
   deskripsi     TEXT NULL,
   PRIMARY KEY (id_kategori)
 );
 
 CREATE TABLE jenis_sampah (
-  id_jenis    INT NOT NULL AUTO_INCREMENT,
+  id_jenis    INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   id_kategori INT NOT NULL,
   nama_jenis  VARCHAR(100) NOT NULL,
   harga       DECIMAL(12,2) NOT NULL DEFAULT 0,
@@ -40,7 +36,7 @@ CREATE TABLE jenis_sampah (
 );
 
 CREATE TABLE setoran (
-  id_setoran      INT NOT NULL AUTO_INCREMENT,
+  id_setoran      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   id_pengguna     INT NOT NULL,
   id_admin        INT NULL,
   id_jenis        INT NOT NULL,
