@@ -5,14 +5,22 @@ CREATE TABLE admin (
   password VARCHAR(255) NOT NULL,
   UNIQUE KEY uq_admin_email (email)
 );
-
+CREATE TABLE alamat (
+    id_alamat INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    label VARCHAR(50) NOT NULL,
+    jalan VARCHAR(255) NOT NULL,
+    kota VARCHAR(100) NOT NULL
+);
 CREATE TABLE pengguna (
   id_pengguna INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   id_alamat   INT NULL,
   nama        VARCHAR(100) NOT NULL,
   no_telepon  VARCHAR(20) NULL,
   email       VARCHAR(100) NOT NULL,
-  password    VARCHAR(255) NOT NULL
+  password    VARCHAR(255) NOT NULL,
+  status_akun ENUM('aktif', 'nonaktif') DEFAULT ('aktif'),
+   CONSTRAINT fk_alamat_pengguna FOREIGN KEY (id_alamat)
+    REFERENCES alamat (id_alamat) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 CREATE TABLE kategori_sampah (
